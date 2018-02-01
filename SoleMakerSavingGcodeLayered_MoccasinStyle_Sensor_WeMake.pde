@@ -1613,7 +1613,7 @@ boolean EQ(float A, float B) {
 } 
 
 void startGcode() {// currently for an Ultimaker 2 Extended.  Cut and Paste from Cura generated gCode
-  txt.println(";FLAVOR:UltiGCode");
+  txt.println(";FLAVOR:Marlin");
   txt.println("; TIME:400");
   txt.println(";MATERIAL:160");
   txt.println("; MATERIAL2: 0");
@@ -1621,6 +1621,21 @@ void startGcode() {// currently for an Ultimaker 2 Extended.  Cut and Paste from
   //  txt.println(";NOZZLE_DIAMETER2: 0.800000");
   txt.println(";Layer count: " + nf(layersTotal));
   txt.println(";LAYER:0");
+  txt.println("M82 ; absolute extrusion mode");
+  txt.println("G21 ; set units to millimeters");
+  txt.println("G90 ; use absolute positioning");
+  txt.println("M82 ; absolute extrusion mode");
+  txt.println("M104 S210 ; set extruder temp");
+  txt.println("M140 S60 ; set bed temp");
+  txt.println("M190 S60 ; wait for bed temp");
+  txt.println("M109 S210 ; wait for extruder temp");
+  txt.println("G28 W ; home all without mesh bed level");
+  txt.println("G80 ; mesh bed leveling");
+  txt.println("G92 E0.0 ; reset extruder distance position");
+  txt.println("G1 Y-3.0 F1000.0 ; go outside print area");
+  txt.println("G1 X60.0 E9.0 F1000.0 ; intro line");
+  txt.println("G1 X100.0 E21.5 F1000.0 ; intro line");
+  txt.println("G92 E0.0 ; reset extruder distance position");
   txt.println("M107");
   txt.println("G0 F9000 X10 Y110");
   txt.println("G0  F"+nf(speed)); //Start Layer
