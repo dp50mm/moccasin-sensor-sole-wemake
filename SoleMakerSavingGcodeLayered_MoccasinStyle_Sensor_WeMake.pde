@@ -1644,8 +1644,8 @@ void startGcode() {// currently for a Prusa i3 mk2 multimat
 }
 
 void endGcode() {// currently for a Prusa i3 mk2 multimat 
-  txt.println("G0 F9000 X110.000 Y126.900 Z" + nf(currentLayer+15)");
-  txt.println("M107");
+  txt.println("G10 ; retract");
+  txt.println("G0 F9000 X110.000 Y126.900 Z" + nf(currentLayer+15));
   txt.println("M104 S0 ; turn off extruder");
   txt.println("M140 S0 ; turn off heatbed");
   txt.println("M107 ; turn off fan");
